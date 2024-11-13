@@ -53,3 +53,25 @@ Topic: poems	TopicId: 2kUd5NMySD2g8uCxbpLVKA	PartitionCount: 3	ReplicationFactor
 	Topic: poems	Partition: 1	Leader: 3	Replicas: 3,1,2	Isr: 3,1,2
 	Topic: poems	Partition: 2	Leader: 1	Replicas: 1,2,3	Isr: 1,2,3
 ```
+
+## Examining Zookeeper
+
+Look at how Zookeeper is configured by running this command from a terminal on the host:
+
+```bash
+echo srvr | nc localhost 2181
+```
+
+The result will be something like this:
+
+```
+Zookeeper version: 3.8.4-9316c2a7a97e1666d8f4593f34dd6fc36ecc436c, built on 2024-02-12 22:16 UTC
+Latency min/avg/max: 0/0.8358/14
+Received: 403
+Sent: 406
+Connections: 3
+Outstanding: 0
+Zxid: 0x1ab
+Mode: standalone
+Node count: 141
+```

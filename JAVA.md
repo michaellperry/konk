@@ -15,3 +15,11 @@ openjdk 21.0.5 2024-10-15
 OpenJDK Runtime Environment (build 21.0.5+11-Ubuntu-1ubuntu120.04)
 OpenJDK 64-Bit Server VM (build 21.0.5+11-Ubuntu-1ubuntu120.04, mixed mode, sharing)
 ```
+
+## Build and Run Hello World
+
+```bash
+cd hello-world
+javac HelloWorld.java
+java HelloWorld
+```

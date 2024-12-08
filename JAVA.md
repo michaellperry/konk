@@ -23,3 +23,9 @@ cd hello-world
 javac HelloWorld.java
 java HelloWorld
 ```
+
+## Create a Maven Project
+
+```bash
+mvn archetype:generate -DgroupId=com.qedcode -DartifactId=first-producer -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+```

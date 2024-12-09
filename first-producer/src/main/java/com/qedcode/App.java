@@ -4,11 +4,15 @@ import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Your first Kafka producer
  */
 public class App {
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
     public static void main(String[] args) {
         Properties kafkaProps = new Properties();
         kafkaProps.put("bootstrap.servers", "localhost:9092");
@@ -19,8 +23,9 @@ public class App {
         ProducerRecord<String, String> record = new ProducerRecord<>("CustomerCountry", "Precision Products", "France");
         try {
             producer.send(record);
+            logger.info("Message sent successfully");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error sending message", e);
         } finally {
             producer.close();
         }

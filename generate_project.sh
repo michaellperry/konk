@@ -11,7 +11,7 @@ PROJECT_NAME=$1
 # Execute the Maven archetype generate command with the provided project name
 mvn archetype:generate -DgroupId=com.qedcode -DartifactId=$PROJECT_NAME -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
 
-# Add Kafka, Logback, and SLF4J dependencies to the generated pom.xml
+# Add Kafka, Logback, SLF4J dependencies, and maven-shade-plugin to the generated pom.xml
 POM_FILE="$PROJECT_NAME/pom.xml"
 sed -i '' '/<\/dependencies>/ i\
     <dependency>\
@@ -29,6 +29,23 @@ sed -i '' '/<\/dependencies>/ i\
       <artifactId>logback-classic</artifactId>\
       <version>1.2.6</version>\
     </dependency>' $POM_FILE
+
+sed -i '' '/<\/build>/ i\
+    <plugins>\
+      <plugin>\
+        <groupId>org.apache.maven.plugins</groupId>\
+        <artifactId>maven-shade-plugin</artifactId>\
+        <version>3.2.4</version>\
+        <executions>\
+          <execution>\
+            <phase>package</phase>\
+            <goals>\
+              <goal>shade</goal>\
+            </goals>\
+          </execution>\
+        </executions>\
+      </plugin>\
+    </plugins>' $POM_FILE
 
 # Create resources directory and add kafka.properties and logback.xml files
 mkdir -p "$PROJECT_NAME/src/main/resources"

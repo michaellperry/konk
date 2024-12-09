@@ -1,5 +1,7 @@
 package com.qedcode;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -15,9 +17,12 @@ public class App {
 
     public static void main(String[] args) {
         Properties kafkaProps = new Properties();
-        kafkaProps.put("bootstrap.servers", "localhost:9092");
-        kafkaProps.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        kafkaProps.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        try (FileInputStream fis = new FileInputStream("src/main/resources/kafka.properties")) {
+            kafkaProps.load(fis);
+        } catch (IOException e) {
+            logger.error("Error loading Kafka properties", e);
+            return;
+        }
 
         Producer<String, String> producer = new KafkaProducer<>(kafkaProps);
         logger.info("Kafka producer initialized");

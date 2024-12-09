@@ -20,6 +20,7 @@ public class App {
         kafkaProps.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         Producer<String, String> producer = new KafkaProducer<>(kafkaProps);
+        logger.info("Kafka producer initialized");
         ProducerRecord<String, String> record = new ProducerRecord<>("CustomerCountry", "Precision Products", "France");
         try {
             producer.send(record);
